@@ -1,0 +1,14 @@
+== Developing ExpencesManager  application with fuse
+
+Before you start, make sure you have installed the following software:
+
+http://openjdk.java.net/install/Java[SE Development Kit (JDK) version 1.8.x (Java 8)]
+
+https://maven.apache.org/download.cgi[Apache Maven]
+
+
+=== Developing API
+
+API First approach
+
+

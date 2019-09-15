@@ -1,0 +1,43 @@
+
+:listing-caption: Listing
+:toc:
+:toclevels: 6
+:numbered:
+:chapter-label:
+:pdf-page-size: A4
+
+:title-logo-image: redhat-header-consulting.jpg
+
+
+:toc:
+:toclevels: 6
+:numbered:
+:chapter-label:
+:pdf-page-size: A4
+
+
+
+= Red Hat Integration Bundle workshop
+
+
+mailto:nmajorov@redhat.com[Nikolaj Majorov]
+
+Overview of RedHat bundles can be found here:
+
+https://access.redhat.com/articles/3666991
+
+
+This workshop is for Red Hat integration bundle and
+shows simple case for developing an a API based Cloud Native application.
+
+
+include::docs/developing-app.asciidoc[]
+
+
+include::docs/modernize-legacy.asciidoc[]
+
+
+
+
+
+

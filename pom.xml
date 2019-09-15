@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <!-- Artifact identifier -->
+    <groupId>ch.redhat.int</groupId>
+    <artifactId>int-workshop</artifactId>
+    <version>1.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!-- Artifact description -->
+    <description>Integration Bundle demo</description>
+    <inceptionYear>2019</inceptionYear>
+
+    <!-- Component consists of the following modules: 
+    <modules>
+        <module>EapSamlBuildRoot</module>
+        <module>EapSamlFactory</module>
+        <module>EapSamlXMLSecModule</module>
+        <module>EapSamlModule</module>
+    </modules>
+
+    -->
+
+</project>
