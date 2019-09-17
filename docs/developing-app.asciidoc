@@ -11,4 +11,28 @@ https://maven.apache.org/download.cgi[Apache Maven]
 
 API First approach
 
+An API-first approach means that for any given development project,
+your APIs are treated as “first-class citizens.” That everything about a project revolves around
+the idea that the end product will be consumed by mobile devices, and that APIs will be consumed by client applications.
 
+
+https://swagger.io/resources/articles/adopting-an-api-first-approach/
+
+
+The Benefits of an API-First Approach:
+
+* Development teams can work in parallel
+
+* Ensures good developer experiences
+
+* Reduces the risk of failure
+
+Steps to develop API:
+
+Deploy  https://apicurio-studio.readme.io[Apicurio Studio]  to OpenShift.
+
+image::./docs/images/Apicurio001.png[role=”left”]
+
+image::./docs/images/Apicurio002.png[role=”left”]
+
+image::./docs/images/Apicurio003.png[role=”left”]

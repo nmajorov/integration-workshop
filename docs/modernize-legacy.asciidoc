@@ -3,19 +3,20 @@
 
 === Enterprise Service Bus monolith
  
-Companies are facing a problem with modern technology adoption and need to integrate old legacy application which are still running inside a company and have a lifetime from 5-10 years. 
-Lot of this applicaion are using SOAP as a intgration protocoll , SAML as security protocol and runnning on monolyth ESB system. 
-Usially ESB is a Top-Down approach there following  ascpect of services are centrilized:
+Companies are facing a problem with modern technology adoption and need to integrate old legacy application which they are 
+struggle maintain and that they have to support in the lifetime from 5-10 years. 
+Lot of this legacy applications are using SOAP as a integration protocol , SAML as security protocol and runnning on monolyth ESB system. 
+Usually ESB is a Top-Down approach there following  ascpect of services are centrilized:
 
 * SOA governance / Endpoint definitions
 * Routing 
-* Protocol trasformation
+* Protocol transformation
 * Mapping
 * Content Enrichment and Mapping
 * Security
 
 
-lets see how we can adress this with  Microservice Architecture and Red Hat Integration Bundle.
+lets see how we can address this with  Microservice Architecture and Red Hat Integration Bundle.
 
 
 === SOA governance / Endpoint definitions
@@ -28,7 +29,7 @@ Legasy application are using a WSDL (Web Services Description Language ) to desc
 === Routing
 
 Different clients are need different data and microservices are fine-grained APIs which means client need to interact 
-with multiple service. Solution for this will be to havean API gateway that is the single entry point for all clients. 
+with multiple service. Solution for this will be to have API gateway that is the single entry point for all clients.
 
 3scale API Gateway is the RedHat answer for microservices routing.
 
