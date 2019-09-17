@@ -22,6 +22,29 @@
 
 mailto:nmajorov@redhat.com[Nikolaj Majorov]
 
+== Overview
+
+=== All Middlware services
+
+image:docs/images/middlware_stategy.jpeg[middlware_stategy.jpeg]
+
+=== RedHat Integration Bundle
+
+
+image:docs/images/RedHatIntegration.png[RedHatIntegration.png]
+
+
+
+All of the products included in Application Runtimes plus:
+
+* Fuse
+* AMQ (full product with AMQ Streams)
+* 3scale API Management
+image:docs/images/RedHatIntegration_components.png[Components]
+
+
+
+
 Overview of RedHat bundles can be found here:
 
 https://access.redhat.com/articles/3666991
@@ -35,9 +58,3 @@ include::docs/developing-app.asciidoc[]
 
 
 include::docs/modernize-legacy.asciidoc[]
-
-
-
-
-
-

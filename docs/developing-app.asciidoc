@@ -36,3 +36,46 @@ image::./docs/images/Apicurio001.png[role=”left”]
 image::./docs/images/Apicurio002.png[role=”left”]
 
 image::./docs/images/Apicurio003.png[role=”left”]
+
+
+
+=== Create Fuse7 Project for OpenShift
+
+
+----
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
+  -DarchetypeCatalog=https://maven.repository.redhat.com/ga/io/fabric8/archetypes/archetypes-catalog/2.2.0.fuse-740017-redhat-00003/archetypes-catalog-2.2.0.fuse-740017-redhat-00003-archetype-catalog.xml \
+  -DarchetypeGroupId=org.jboss.fuse.fis.archetypes \
+  -DarchetypeArtifactId=spring-boot-camel-xml-archetype \
+  -DarchetypeVersion=2.2.0.fuse-740017-redhat-00003
+----
+
+
+to generate  Swagger support
+
+----
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
+  -DarchetypeCatalog=https://maven.repository.redhat.com/ga/io/fabric8/archetypes/archetypes-catalog/2.2.0.fuse-740017-redhat-00003/archetypes-catalog-2.2.0.fuse-740017-redhat-00003-archetype-catalog.xml \
+  -DarchetypeGroupId=org.jboss.fuse.fis.archetypes \
+  -DarchetypeArtifactId=spring-boot-cxf-jaxrs-archetype \
+  -DarchetypeVersion=2.2.0.fuse-740017-redhat-00003
+
+
+....
+
+
+
+
+Define value for property 'artifactId': : epenxes-manager
+Define value for property 'version':  1.0-SNAPSHOT: :
+Define value for property 'package':  fuse.redcloud.site: :
+Confirm properties configuration:
+groupId: redcloud.site
+artifactId: expenses-manager
+version: 1.0-SNAPSHOT
+package: fuse.redcloud.site
+ Y: : y
+
+----
+
+=== Code First approach
