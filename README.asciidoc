@@ -43,15 +43,48 @@ All of the products included in Application Runtimes plus:
 image:docs/images/RedHatIntegration_components.png[Components]
 
 
-
-
 Overview of RedHat bundles can be found here:
 
 https://access.redhat.com/articles/3666991
 
 
-This workshop is for Red Hat integration bundle and
-shows simple case for developing an a API based Cloud Native application.
+
+=== RED HAT 3SCALE API MANAGEMENT
+
+image:docs/images/3SCALE.png[3scacle]
+
+Features:
+
+* Scalability and Uptime
+
+The API management platform you choose shouldn’t be a bottleneck or a single point of failure. It must provide caching,
+fault tolerance, traffic routing, and load balancing.
+3scale is designed to scale to billions of API calls
+
+* Developer Portal
+
+A developer portal is key to ensuring a positive experience for developers. To keep them engaged, provide the tools they need to get started in minutes
+with use cases, example code, documentation, and pricing.
+
+
+* API Access Control and Security
+
+3scale’s powerful API access, policy and traffic controls make it
+simple to authenticate traffic, restrict by policy, protect backend services, impose rate limits and create access tiers. Provide sophisticated support for authentication with API keys, OIDC tokens or custom configs. Classify different types of users and provide a variety of business services. Application plans help control what can be done with your API. Rate limits allow you to manage and control flow.
+
+
+* Analytics
+
+You need insight into how your APIs are performing:
+access to trends, peak usage times, which applications generate the most traffic, which APIs are most popular, and which APIs or endpoints are used the least.
+
+
+* Monetization
+
+APIs can enable whole new revenue streams so the ability
+to set pricing rules, invoicing, and payment collection is critical.
+
+
 
 
 include::docs/developing-app.asciidoc[]

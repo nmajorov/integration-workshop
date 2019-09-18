@@ -7,6 +7,13 @@ http://openjdk.java.net/install/Java[SE Development Kit (JDK) version 1.8.x (Jav
 https://maven.apache.org/download.cgi[Apache Maven]
 
 
+
+This workshop is for Red Hat integration bundle and
+shows simple case for developing an a API based Cloud Native application.
+
+
+
+
 === Need for speed: the new imperative for digital business.
 
 
@@ -50,7 +57,7 @@ ____
 
 === Developing API
 
-API First approach
+==== API First approach
 
 An API-first approach means that for any given development project,
 your APIs are treated as “first-class citizens.” That everything about a project revolves around
