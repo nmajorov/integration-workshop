@@ -7,6 +7,47 @@ http://openjdk.java.net/install/Java[SE Development Kit (JDK) version 1.8.x (Jav
 https://maven.apache.org/download.cgi[Apache Maven]
 
 
+=== Need for speed: the new imperative for digital business.
+
+
+With software increasingly key to how users engage with businesses and how businesses innovate
+to stay competitive, the speed of application development and delivery is the new digital business
+imperative.
+
+
+
+Tech trends:
+
+image::./docs/images/key-technology-trends.jpeg[Key technology trends]
+
+
+[quote,CHRISTIAN POSTA, CHIEF ARCHITECT AT RED HAT AND AUTHOR OF MICROSERVICES FOR JAVA DEVELOPERS]
+____
+Cloud-native’ is an adjective that describes the applications, architectures,
+platforms/infrastructure, and processes, that together make it economical to work in
+a way that allows us to improve our ability to quickly respond to
+change and reduce unpredictability
+____
+
+Cloud Native Application characteristics:
+
+image::./docs/images/cloud_native.png[Cloud Native]
+
+
+
+Tools are also important:
+
+[quote, Dianne Marsh, director of engineering for engineering tools at Netflix.]
+____
+We want to make sure that all the engineers at Netflix are able
+to work as fast and as responsibly fast as they want to work.
+If we don’t give them enough context about what they’re
+deploying or about what’s going on in the ecosystem at large
+then they could cause big problems in the service.
+They could cause disruptions in the service.
+____
+
+
 === Developing API
 
 API First approach
