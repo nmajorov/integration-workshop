@@ -1,26 +1,8 @@
-
-:listing-caption: Listing
-:toc:
-:toclevels: 6
-:numbered:
-:chapter-label:
-:pdf-page-size: A4
-
-:title-logo-image: redhat-header-consulting.jpg
-
-
-:toc:
-:toclevels: 6
-:numbered:
-:chapter-label:
-:pdf-page-size: A4
-
-
-
 = Red Hat Integration Bundle workshop
-
-
-mailto:nmajorov@redhat.com[Nikolaj Majorov]
+Nikolaj Majorov
+:toc:
+:toclevels: 4
+:numbered:
 
 == Overview
 
