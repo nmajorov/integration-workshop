@@ -3,9 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.redhat</groupId>
     <artifactId>fuse7-swagger-gen</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
 
     <properties>
@@ -16,6 +14,14 @@
         <jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
         <springfox-version>2.7.0</springfox-version>
     </properties>
+
+
+    <parent>
+       <groupId>ch.redhat</groupId>
+       <artifactId>fuse7-example</artifactId>
+       <version>1.0-SNAPSHOT</version>
+    </parent>
+
 
     <dependencyManagement>
         <dependencies>
@@ -94,7 +100,7 @@
                                    <configOptions>
                                        <sourceFolder>${project.build.directory}/src/gen</sourceFolder>
                                    </configOptions>
-                              
+
                                    <output>${generated-sources-path}</output>
                                      -->
                 </configuration>

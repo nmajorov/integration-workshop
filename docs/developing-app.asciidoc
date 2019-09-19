@@ -86,6 +86,54 @@ image::./docs/images/Apicurio002.png[role=”left”]
 image::./docs/images/Apicurio003.png[role=”left”]
 
 
+Design your API with http://spec.openapis.org/oas/v3.0.2[OpenAPI v3.0]:
+
+image::./docs/images/Apicurio004.png[role=”left”]
+
+
+Export openapi json file and generate java classes using swagger maven plugin.
+
+Example for pom.xml with swagger-maven plugin configuration:
+
+[source,xml]
+----
+  <plugin>
+      <groupId>io.swagger.codegen.v3</groupId>
+      <artifactId>swagger-codegen-maven-plugin</artifactId>
+      <version>3.0.11</version>
+      <configuration>
+          <inputSpec>${swagger.file}</inputSpec>
+      </configuration>
+      <executions>
+          <execution>
+              <id>generate-swagger-spring</id>
+              <phase>generate-sources</phase>
+              <goals>
+                  <goal>generate</goal>
+              </goals>
+              <configuration>
+                  <language>spring</language>
+                  <modelPackage>${project.groupId}.swagger.model</modelPackage>
+                  <apiPackage>${project.groupId}.swagger.api</apiPackage>
+                  <invokerPackage>${project.groupId}.swagger.invoker</invokerPackage>
+              </configuration>
+          </execution>
+      </executions>
+  </plugin>
+----
+
+Example for project can be found in repository:
+
+----
+fuse7-api-first/service-generated
+----
+
+
+Or just click generate button from Apicurio gui.
+It will generate you a fuse7 project. you can download it unzip and run.
+
+
+
 
 === Create Fuse7 Project for OpenShift
 

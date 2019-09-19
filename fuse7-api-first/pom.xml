@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ch.redhat</groupId>
+    <artifactId>fuse7-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- configure the Fuse version you want to use here -->
+        <fuse.bom.version>7.4.0.fuse-740036-redhat-00002</fuse.bom.version>
+        <jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
+        <springfox-version>2.7.0</springfox-version>
+          <!-- dependency versions -->
+        <camel.version>2.21.2</camel.version>
+        <fabric8.version>2.3.7</fabric8.version>
+        <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
+    </properties>
+      <modules>
+        <module>fuse7-example</module>
+        <module>service-generated</module>
+    </modules>
+
+
+
+</project>

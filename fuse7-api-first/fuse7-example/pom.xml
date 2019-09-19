@@ -3,9 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.redhat</groupId>
-    <artifactId>fuse7-example</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>server</artifactId>
 
     <name>Fabric8 :: Quickstarts :: Spring-Boot :: Camel XML</name>
     <description>Spring Boot example running a Camel route defined in XML</description>
@@ -21,12 +19,32 @@
         <springfox-version>2.7.0</springfox-version>
     </properties>
 
+    <parent>
+       <groupId>ch.redhat</groupId>
+       <artifactId>fuse7-example</artifactId>
+       <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <dependencyManagement>
-        <dependencies>
+          <dependencies>
             <dependency>
-                <groupId>org.jboss.redhat-fuse</groupId>
-                <artifactId>fuse-springboot-bom</artifactId>
-                <version>${fuse.bom.version}</version>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
+                <version>${fabric8.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring-boot-dependencies</artifactId>
+                <version>${camel.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -34,13 +52,10 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
-        </dependency>
+    
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+             <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -74,6 +89,13 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox-version}</version>
         </dependency>
+        
+        <dependency>
+        	<groupId>${project.groupId}</groupId>
+   			<artifactId>fuse7-swagger-gen</artifactId>
+   			<version>${project.version}</version>
+        </dependency>
+        
     </dependencies>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
@@ -98,7 +120,7 @@
                                    <configOptions>
                                        <sourceFolder>${project.build.directory}/src/gen</sourceFolder>
                                    </configOptions>
-                              
+
                                    <output>${generated-sources-path}</output>
                                      -->
                 </configuration>
