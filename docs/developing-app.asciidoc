@@ -1,4 +1,4 @@
-== Developing ExpencesManager  application with fuse
+== Developing application with fuse
 
 Before you start, make sure you have installed the following software:
 
@@ -75,7 +75,7 @@ The Benefits of an API-First Approach:
 
 * Reduces the risk of failure
 
-Steps to develop API:
+==== Design API with Apicurio
 
 Deploy  https://apicurio-studio.readme.io[Apicurio Studio]  to OpenShift.
 
@@ -91,7 +91,15 @@ Design your API with http://spec.openapis.org/oas/v3.0.2[OpenAPI v3.0]:
 image::./docs/images/Apicurio004.png[role=”left”]
 
 
-Export openapi json file and generate java classes using swagger maven plugin.
+Click generate button from Apicurio gui.
+It will generate you a fuse7 project -   download it unzip, correct and run.
+
+
+image::./docs/images/Apicurio005.png[role=”left”]
+
+
+
+Another option will be to  export openapi json file and generate java classes using swagger maven plugin.
 
 Example for pom.xml with swagger-maven plugin configuration:
 
@@ -129,13 +137,63 @@ fuse7-api-first/service-generated
 ----
 
 
-Or just click generate button from Apicurio gui.
-It will generate you a fuse7 project. you can download it unzip and run.
+
+=== Build and Deploy on OpenShift
+
+login to your OpenShift and select project:
+
+[source,bash]
+----
+oc project
+Using project "nikofuse" on server "https://master00-dc8c.generic.opentlc.com:443".
+mvn clean -DskipTests fabric8:deploy -Popenshift
+
+#some seconds later...
+
+INFO] Creating a Service from openshift.yml namespace nikofuse name spring-boot-cxf-jaxrs
+[INFO] Created Service: target/fabric8/applyJson/nikofuse/service-spring-boot-cxf-jaxrs.json
+[INFO] Using project: nikofuse
+[INFO] Creating a DeploymentConfig from openshift.yml namespace nikofuse name spring-boot-cxf-jaxrs
+[INFO] Created DeploymentConfig: target/fabric8/applyJson/nikofuse/deploymentconfig-spring-boot-cxf-jaxrs.json
+[INFO] Creating Route nikofuse:spring-boot-cxf-jaxrs host: null
+[INFO] F8: HINT: Use the command `oc get pods -w` to watch your pods start up
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 05:54 min
+[INFO] Finished at: 2019-09-19T10:56:45+02:00
+[INFO] ------------------------------------------------------------------------
+
+----
+
+See deployment in the OpenShift web-console:
+
+image::./docs/images/spring_app_deployed.png[Spring_deployment,640,480]
+
+
+Add api to 3scale:
+
+image::./docs/images/3scale_add_api.png[3scale,640,480]
+
+Enhance api security with key !
+
+and call it:
+
+
+[source,bash]
+----
+curl -kv "https://api-3scale-apicast-staging.apps-dc8c.generic.opentlc.com:443/services/helloservice?user_key=3d4094d3eb6c056e455bfdccd6f010c5"
+----
+
+You create your first secure api !
 
 
 
 
-=== Create Fuse7 Project for OpenShift
+=== Code First approach
+
+
+==== Create Fuse7 Project for OpenShift
 
 
 ----
@@ -173,6 +231,3 @@ package: fuse.redcloud.site
  Y: : y
 
 ----
-
-=== Code First approach
-TODO....
