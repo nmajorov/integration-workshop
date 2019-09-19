@@ -1,8 +1,6 @@
 = Red Hat Integration Bundle workshop
-Nikolaj Majorov
-:toc:
-:toclevels: 4
-:numbered:
+:toc: left
+:stylesheet: asciidoctor.css
 
 == Overview
 

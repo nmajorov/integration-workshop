@@ -1,5 +1,3 @@
 #!/bin/sh
 
-asciidoc -a stylesheet=./asciidoctor.css  -a linkcss  README.asciidoc
-
-
+asciidoctor -a stylesheet=./asciidoctor.css  -a linkcss  README.asciidoc
