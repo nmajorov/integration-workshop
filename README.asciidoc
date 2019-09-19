@@ -1,6 +1,7 @@
 = Red Hat Integration Bundle workshop
 Nikolaj Majorov <nmajorov@redhat.com>
 :toc: left
+:toclevels: 4
 :stylesheet: asciidoctor.css
 
 == About the Author
@@ -57,12 +58,23 @@ ____
 
 
 
-=== All Middlware services
+== Red Hat Middleware
 
-image:docs/images/middlware_stategy.jpeg[middlware_stategy.jpeg]
+=== Middleware Transition
 
-=== RedHat Integration Bundle
+image::docs/images/MiddlewareTransition.png[Middleware Transition]
 
+=== Red Hat Middleware Strategy
+
+image::docs/images/middlware_stategy.jpeg[middlware Strategy]
+
+==== Red Hat Middleware Bundles
+
+image::docs/images/RedHatMiddlwareBundlesOverview.png[Redhat Bundle Overview]
+
+
+
+==== Red Hat Integration Bundle
 
 image:docs/images/RedHatIntegration.png[RedHatIntegration.png]
 
@@ -84,7 +96,18 @@ https://access.redhat.com/articles/3666991
 
 === RED HAT 3SCALE API MANAGEMENT
 
+API why so important ?
+
+image::./docs/images/api_value.png[apivalue]
+
+
+3scale Overview
 image:docs/images/3SCALE.png[3scacle]
+
+
+Features:
+
+image::docs/images/3scalefeatures.png[3scale Features]
 
 Features:
 

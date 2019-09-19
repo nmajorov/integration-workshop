@@ -1,4 +1,4 @@
-== Developing application with fuse
+== Developing application with FUSE
 
 Before you start, make sure you have installed the following software:
 
