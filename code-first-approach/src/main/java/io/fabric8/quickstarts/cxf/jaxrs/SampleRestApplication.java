@@ -52,8 +52,12 @@ public class SampleRestApplication {
     }
 
 
-/**
+
     @Bean
+    /**
+     * allow to access api documentation from anywhere
+     * we need it for external swagger ui
+     */
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
@@ -68,5 +72,4 @@ public class SampleRestApplication {
         return new CorsFilter(source);
     }
 
-    **/
 }

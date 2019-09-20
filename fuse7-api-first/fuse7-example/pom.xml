@@ -3,6 +3,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+
+    <parent>
+        <groupId>ch.redhat</groupId>
+        <artifactId>fuse7-example</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+
     <artifactId>server</artifactId>
 
     <name>Fabric8 :: Quickstarts :: Spring-Boot :: Camel XML</name>
@@ -11,51 +19,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!-- configure the Fuse version you want to use here -->
-        <fuse.bom.version>7.4.0.fuse-740036-redhat-00002</fuse.bom.version>
-        <swagger.file>${project.basedir}/src/main/resources/swagger.json</swagger.file>
-        <jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
-        <springfox-version>2.7.0</springfox-version>
     </properties>
 
-    <parent>
-       <groupId>ch.redhat</groupId>
-       <artifactId>fuse7-example</artifactId>
-       <version>1.0-SNAPSHOT</version>
-    </parent>
 
-    <dependencyManagement>
-          <dependencies>
-            <dependency>
-                <groupId>io.fabric8</groupId>
-                <artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
-                <version>${fabric8.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-spring-boot-dependencies</artifactId>
-                <version>${camel.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
-    
+
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-             <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -110,36 +83,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>io.swagger.codegen.v3</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>3.0.11</version>
-                <configuration>
-                    <inputSpec>${swagger.file}</inputSpec>
-                    <!--
-                                   <configOptions>
-                                       <sourceFolder>${project.build.directory}/src/gen</sourceFolder>
-                                   </configOptions>
 
-                                   <output>${generated-sources-path}</output>
-                                     -->
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-swagger-spring</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <language>spring</language>
-                            <modelPackage>${project.groupId}.swagger.model</modelPackage>
-                            <apiPackage>${project.groupId}.swagger.api</apiPackage>
-                            <invokerPackage>${project.groupId}.swagger.invoker</invokerPackage>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

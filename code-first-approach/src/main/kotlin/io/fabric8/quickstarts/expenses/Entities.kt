@@ -1,4 +1,4 @@
-package io.fabric8.quickstarts.expences
+package io.fabric8.quickstarts.expenses
 
 import java.math.BigDecimal
 import java.time.LocalDateTime
@@ -14,7 +14,7 @@ class User(
 )
 
 
-class Expence (
+class Expense (
 
         var description: String,
         var date: LocalDateTime,

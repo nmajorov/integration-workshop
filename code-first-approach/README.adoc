@@ -3,6 +3,7 @@
 This example demonstrates how you can use Apache CXF with Spring Boot
 based on a https://github.com/fabric8io/base-images#java-base-images[fabric8 Java base image].
 
+We use kotlin language to write rest services and entities.
 The quickstart uses Spring Boot to configure a little application that includes a CXF JAXRS endpoint with Swagger enabled.
 
 IMPORTANT: This quickstart can run in 2 modes: standalone on your machine and on Kubernetes / OpenShift Cluster
