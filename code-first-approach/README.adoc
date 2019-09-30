@@ -6,6 +6,9 @@ based on a https://github.com/fabric8io/base-images#java-base-images[fabric8 Jav
 We use kotlin language to write rest services and entities.
 The quickstart uses Spring Boot to configure a little application that includes a CXF JAXRS endpoint with Swagger enabled.
 
+
+
+
 IMPORTANT: This quickstart can run in 2 modes: standalone on your machine and on Kubernetes / OpenShift Cluster
 
 == Deployment options
@@ -106,6 +109,18 @@ $ mvn clean package
 ----
 $ mvn spring-boot:run
 ----
+
+
+=== Gradle Build
+
+to run local with gradle use:
+
+		
+			gradle build -x test bootRun  
+
+
+
+
 
 You can then access the CXF JAXRS endpoint directly from your Web browser, e.g.:
 
