@@ -16,8 +16,9 @@ class User(
 
 class Expense (
 
+		var id: Long? = null,
         var description: String,
-        var date: LocalDateTime,
+        var createdAt: LocalDateTime,
         var sum: BigDecimal,
        // @ManyToOne var author: User,
         var addedAt: LocalDateTime = LocalDateTime.now()
