@@ -18,9 +18,9 @@ class Expense (
 
 		var id: Long? = null,
         var description: String,
-        var createdAt: LocalDateTime,
-        var sum: BigDecimal,
+        var createdAT: LocalDateTime,
+        var amount: Long,
        // @ManyToOne var author: User,
-        var addedAt: LocalDateTime = LocalDateTime.now()
+        var version: LocalDateTime = LocalDateTime.now()
 )
         //@Id @GeneratedValue var id: Long? = null)
