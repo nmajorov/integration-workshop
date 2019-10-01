@@ -17,6 +17,7 @@ package io.fabric8.quickstarts.cxf.jaxrs;
 
 import java.util.Arrays;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import io.fabric8.quickstarts.expences.ExpensesServiceImpl;
 import org.apache.cxf.Bus;
 import org.apache.cxf.endpoint.Server;
@@ -49,6 +50,7 @@ public class SampleRestApplication {
         endpoint.setBus(bus);
         endpoint.setServiceBeans(Arrays.<Object>asList(new ExpensesServiceImpl()));
         endpoint.setAddress("/");
+        endpoint.setProvider(new JacksonJaxbJsonProvider());
         endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));
         return endpoint.create();
     }

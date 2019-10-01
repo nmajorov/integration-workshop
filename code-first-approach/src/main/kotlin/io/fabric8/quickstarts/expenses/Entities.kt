@@ -1,7 +1,8 @@
 package io.fabric8.quickstarts.expenses
 
-import java.math.BigDecimal
 import java.time.LocalDateTime
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 
 //https://spring.io/guides/tutorials/spring-boot-kotlin/
@@ -13,14 +14,18 @@ class User(
         var id: Long? = null
 )
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Expense (
-
+		@JsonProperty("id")
 		var id: Long? = null,
+		@JsonProperty("description")
         var description: String,
+		@JsonProperty("createdAT")
         var createdAT: LocalDateTime,
+		@JsonProperty("amount")
         var amount: Long,
        // @ManyToOne var author: User,
-        var version: LocalDateTime = LocalDateTime.now()
+		@JsonProperty("tstamp")
+        var tstamp: LocalDateTime = LocalDateTime.now()
 )
         //@Id @GeneratedValue var id: Long? = null)
