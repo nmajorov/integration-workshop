@@ -15,7 +15,7 @@
         <simple>body</simple>
         <log id="log1" message="splitted message: $simple{body.createdAT}"/>
         <to id="Persist entity" uri="sql:INSERT INTO EXPENSES (DESCRIPTION, AMOUNT ,CREATED,TSTAMP)
-        VALUES (:#$simple{body.description},:#$simple{body.amount},CURDATE(),CURDATE());"/>
+        VALUES (:#$simple{body.description},:#$simple{body.amount},TO_DATE(:#$simple{body.createdAT.toString},'YYYY-MM-DD'),CURDATE());"/>
       </split>
       <log id="_log1" message="insert done"/>
       <to id="_to1" uri="direct:select"/>
