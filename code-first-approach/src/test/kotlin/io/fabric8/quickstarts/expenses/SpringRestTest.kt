@@ -10,11 +10,12 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.apache.commons.logging.LogFactory
 import org.apache.cxf.endpoint.Server
 import org.apache.cxf.endpoint.ServerImpl
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.Month
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
+import java.sql.Date
+import java.time.LocalDateTime
+import java.time.Month
+import java.time.ZoneId
 
 
 /**
@@ -40,11 +41,15 @@ class SpringRestTest {
 
 		val expenseService = JAXRSClient.getExpenecesService("8080",cxfPathProperty)
 
-        expenseService.create(Expense(amount = 30,
-                createdAT = LocalDateTime.of(2019, Month.SEPTEMBER, 29, 12, 17, 0),
-                description = "Schloss Schoenbrunn entry fee"))
+        var ldt =LocalDateTime.of(2019, Month.SEPTEMBER, 29, 12, 17, 0)
+
+       val resp= expenseService.create(Expense(amount = 30,
+          createdAT = ldt.toLocalDate(),
+       //     createdAT = LocalDateTime.of(2019, Month.SEPTEMBER, 29, 12, 17, 0),
+               description = "Schloss Schoenbrunn entry fee"))
+
 //        Assert.assertEquals("Bar", simpleComponent.foo())
-        assertTrue(false)
+        assertNotNull(resp)
     }
 }
 
