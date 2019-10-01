@@ -9,11 +9,13 @@
       <from id="_from1" uri="direct:in"/>
       <!--  
           <bean id="bean1" method="getCustomers" ref="customerServiceBean" />
+          TO_DATE(:#$simple{body.createdAT},'DD.MM.YY')
       -->
       <split id="split1">
         <simple>body</simple>
-        <log id="log1" message="splitted message: ${body}"/>
-        <to id="Persist entity" uri="sql:INSERT INTO EXPENSES(DATA) VALUES (#)"/>
+        <log id="log1" message="splitted message: $simple{body.createdAT}"/>
+        <to id="Persist entity" uri="sql:INSERT INTO EXPENSES (DESCRIPTION, AMOUNT ,CREATED,TSTAMP)
+        VALUES (:#$simple{body.description},:#$simple{body.amount},CURDATE(),CURDATE());"/>
       </split>
       <log id="_log1" message="insert done"/>
       <to id="_to1" uri="direct:select"/>

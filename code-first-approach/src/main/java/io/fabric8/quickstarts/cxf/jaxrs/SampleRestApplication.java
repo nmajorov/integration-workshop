@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import io.fabric8.quickstarts.expences.ExpensesServiceImpl;
+import org.apache.camel.CamelContext;
 import org.apache.cxf.Bus;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
@@ -39,6 +40,9 @@ public class SampleRestApplication {
     @Autowired
     private Bus bus;
 
+    @Autowired
+    private CamelContext camelContext;
+
     public static void main(String[] args) {
         SpringApplication.run(SampleRestApplication.class, args);
     }
@@ -48,7 +52,7 @@ public class SampleRestApplication {
         // setup CXF-RS
         JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
         endpoint.setBus(bus);
-        endpoint.setServiceBeans(Arrays.<Object>asList(new ExpensesServiceImpl()));
+        endpoint.setServiceBeans(Arrays.<Object>asList(new ExpensesServiceImpl(camelContext)));
         endpoint.setAddress("/");
         endpoint.setProvider(new JacksonJaxbJsonProvider());
         endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));

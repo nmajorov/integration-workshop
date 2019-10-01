@@ -6,6 +6,13 @@ import org.springframework.stereotype.Service
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
+import org.apache.camel.CamelContext
+import org.springframework.beans.factory.annotation.Autowired
+import org.apache.camel.EndpointInject;
+import org.apache.camel.FluentProducerTemplate
+
+
+
 
 //check swagger old annotation style
 // /https://github.com/swagger-api/swagger-core/wiki/Annotations
@@ -37,10 +44,10 @@ interface ExpensesService {
     @Produces("application/json")
     @ApiOperation(value = "Add a new expense")
     @ApiResponses(
-            ApiResponse(code = 200, message = "successful operation",response = Long::class),
+            ApiResponse(code = 200, message = "successful operation",response = Response::class),
             ApiResponse(code = 405, message = "invalid input")
     )
-    fun create(expense: Expense) :Long
+    fun create(expense: Expense) :Response
 
 
     @PUT
@@ -68,10 +75,20 @@ interface ExpensesService {
 @Api("/expences")
 class ExpensesServiceImpl : ExpensesService {
 
+    private lateinit var camelContext:CamelContext
+
+    constructor(camelContext:CamelContext){
+        this.camelContext = camelContext
+    }
+
+   // @EndpointInject(uri = "direct:in")
+   // lateinit var producer: FluentProducerTemplate
+
     @ApiOperation(value = "Create expense in system",
             notes = "")
-    override fun create(expense: Expense): Long {
-        TODO("not implemented")
+    override fun create(expense: Expense): Response {
+        camelContext.createFluentProducerTemplate().to("direct:in").withBody(arrayListOf(expense)).send()
+        return Response.ok().build()
     }
 
 
