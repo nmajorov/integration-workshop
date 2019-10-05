@@ -1,23 +1,16 @@
 package io.fabric8.quickstarts.expenses
 
 import io.fabric8.quickstarts.cxf.jaxrs.SampleRestApplication
+import org.apache.commons.logging.LogFactory
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.junit.Assert.*
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import org.apache.commons.logging.LogFactory
-import org.apache.cxf.endpoint.Server
-import org.apache.cxf.endpoint.ServerImpl
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.ApplicationContext
-import java.sql.Date
 import java.time.LocalDateTime
 import java.time.Month
-import java.time.ZoneId
-import java.awt.print.Book
-import java.util.ArrayList
 import javax.ws.rs.core.GenericType
 
 

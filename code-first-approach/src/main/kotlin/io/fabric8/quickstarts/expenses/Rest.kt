@@ -27,7 +27,7 @@ interface ExpensesService {
     @ApiOperation(value = "Get all expenses in system",
             response = Response::class)
     @Produces(MediaType.APPLICATION_JSON)
-    abstract  fun findAll(): Response
+    fun findAll(): Response
 
     @DELETE
     @Path("/{id}")
@@ -99,7 +99,7 @@ class ExpensesServiceImpl : ExpensesService {
 
     override fun findAll(): Response {
         val exchange = this.camelContext.createFluentProducerTemplate().to("direct:select").send()
-        val camelResult= exchange.getIn().body as List<Map<String,Object>>
+        val camelResult= exchange.getIn().body as List<Map<String,Any>>
         val entities = mutableListOf<Expense>()
         //convert sql result to the entities
         camelResult.forEach{
