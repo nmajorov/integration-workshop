@@ -2,16 +2,12 @@ package io.fabric8.quickstarts.expences
 
 import io.fabric8.quickstarts.expenses.Expense
 import io.swagger.annotations.*
+import org.apache.camel.CamelContext
 import org.springframework.stereotype.Service
+import java.sql.Date
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
-import org.apache.camel.CamelContext
-import org.springframework.beans.factory.annotation.Autowired
-import org.apache.camel.EndpointInject;
-import org.apache.camel.FluentProducerTemplate
-
-
 
 
 //check swagger old annotation style
@@ -29,9 +25,9 @@ interface ExpensesService {
     @GET
     @Path("")
     @ApiOperation(value = "Get all expenses in system",
-            response = Expense::class ,responseContainer = "list")
+            response = Response::class)
     @Produces(MediaType.APPLICATION_JSON)
-    abstract  fun findAll(): List<Expense>
+    abstract  fun findAll(): Response
 
     @DELETE
     @Path("/{id}")
@@ -75,14 +71,12 @@ interface ExpensesService {
 @Api("/expences")
 class ExpensesServiceImpl : ExpensesService {
 
-    private lateinit var camelContext:CamelContext
+    private var camelContext:CamelContext
 
     constructor(camelContext:CamelContext){
         this.camelContext = camelContext
     }
 
-   // @EndpointInject(uri = "direct:in")
-   // lateinit var producer: FluentProducerTemplate
 
     @ApiOperation(value = "Create expense in system",
             notes = "")
@@ -103,9 +97,22 @@ class ExpensesServiceImpl : ExpensesService {
     }
 
 
-    override fun findAll(): List<Expense> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun findAll(): Response {
+        val exchange = this.camelContext.createFluentProducerTemplate().to("direct:select").send()
+        val camelResult= exchange.getIn().body as List<Map<String,Object>>
+        val entities = mutableListOf<Expense>()
+        //convert sql result to the entities
+        camelResult.forEach{
+            entities.add(Expense(id= (it.get("id".toUpperCase()) as Long),
+                    description = (it.get("description".toUpperCase()) as String),
+                    amount = (it.get("amount".toUpperCase()) as Long),
+                    createdAT = (it.get("created".toUpperCase()) as Date).toLocalDate(),
+                    tstamp = (it.get("tstamp".toUpperCase()) as Date).toLocalDate()
+            ))
+        }
+        return Response.ok(entities, MediaType.APPLICATION_JSON).build()
     }
+
 
     @ApiOperation(value = "Delete expense by id ",
             notes = "")

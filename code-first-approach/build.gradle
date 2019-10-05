@@ -63,6 +63,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
     compile "org.hsqldb:hsqldb:2.3.5"
     compile 'org.apache.camel:camel-sql:2.19.1'
+    compile "org.apache.camel:camel-jackson:2.19.1"
     compile 'com.mchange:c3p0:0.9.5.3'
 
     implementation ('org.apache.cxf:cxf-rt-frontend-jaxrs:3.3.3'){

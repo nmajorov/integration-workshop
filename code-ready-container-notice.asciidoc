@@ -1,0 +1,15 @@
+# CodeReady Containers 
+
+set more memory:
+
+    crc config set memory 16384
+
+
+if cert expired delete .crc folder from home dir and start again.
+
+
+Good description is here: https://fedoramagazine.org/codeready-containers-complex-solutions-on-openshift-fedora/
+
+
+
+

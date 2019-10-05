@@ -16,6 +16,9 @@ import java.sql.Date
 import java.time.LocalDateTime
 import java.time.Month
 import java.time.ZoneId
+import java.awt.print.Book
+import java.util.ArrayList
+import javax.ws.rs.core.GenericType
 
 
 /**
@@ -37,7 +40,7 @@ class SpringRestTest {
 
     @Test
     fun createExpensesTest() {
-       logger.info("*** rest path settings: ${cxfPathProperty}" )
+       logger.info("*** rest path settings: ${cxfPathProperty}")
 
 		val expenseService = JAXRSClient.getExpenecesService("8080",cxfPathProperty)
 
@@ -50,6 +53,26 @@ class SpringRestTest {
 
 //        Assert.assertEquals("Bar", simpleComponent.foo())
         assertNotNull(resp)
+    }
+
+    @Test
+    fun getAllExpensesTest() {
+        logger.info("*** rest path settings: ${cxfPathProperty}" )
+
+        val expenseService = JAXRSClient.getExpenecesService("8080",cxfPathProperty)
+
+
+
+        val resp= expenseService.findAll()
+        assertTrue(resp.status == 200)
+
+        val entities = resp.readEntity(object : GenericType<List<Expense>>() {
+
+        })
+
+        assertNotNull(entities)
+        assertTrue(entities.isNotEmpty())
+        assertNotNull(entities[0].id)
     }
 }
 
