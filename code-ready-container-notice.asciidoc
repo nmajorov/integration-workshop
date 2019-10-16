@@ -10,6 +10,12 @@ if cert expired delete .crc folder from home dir and start again.
 
 Good description is here: https://fedoramagazine.org/codeready-containers-complex-solutions-on-openshift-fedora/
 
+TODO:
+
+add prometheus monitoring 
+
+https://access.redhat.com/documentation/en-us/red_hat_fuse/7.0/html/managing_fuse/prometheus#openshift_setup
+
 
 
 
