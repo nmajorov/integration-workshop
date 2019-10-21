@@ -68,7 +68,41 @@ image::docs/images/MiddlewareTransition.png[Middleware Transition]
 
 image::docs/images/middlware_stategy.jpeg[middlware Strategy]
 
+
 ==== Red Hat Middleware Bundles
+
+Red Hat offers bundled subscriptions . They can be deployed on-premise
+or to a public cloud - with or without OpenShift.
+
+[cols=2,cols="2,4",options=header]
+|===================================
+|Subscription Name             | Red Hat Supported Products and Components Included
+|Red Hat Application Runtimes  | JBoss EAP
+|                              | JBoss Web Server
+|                              | OpenShift Application Runtimes
+|                              | Red Hat Data Grid
+|                              | AMQ (broker only)
+|                              | Red Hat Single Sign-On
+|                              | OpenJDK
+|                              | JBoss Core Services
+|
+|===================================
+
+[cols=2,cols="2,4"]
+|===================================
+| Red Hat Integration          | All of the products included in Application Runtimes
+|                              | Fuse
+|                              | AMQ (full product with AMQ Streams)
+|                              | 3scale API Management
+|===================================
+
+
+
+Overview of RedHat bundles can be found here:
+
+https://access.redhat.com/articles/3666991
+
+
 
 image::docs/images/RedHatMiddlwareBundlesOverview.png[Redhat Bundle Overview]
 
@@ -88,9 +122,6 @@ All of the products included in Application Runtimes plus:
 image:docs/images/RedHatIntegration_components.png[Components]
 
 
-Overview of RedHat bundles can be found here:
-
-https://access.redhat.com/articles/3666991
 
 
 
@@ -99,6 +130,7 @@ https://access.redhat.com/articles/3666991
 API why so important ?
 
 image::./docs/images/api_value.png[apivalue]
+
 
 
 3scale Overview
@@ -140,7 +172,19 @@ access to trends, peak usage times, which applications generate the most traffic
 APIs can enable whole new revenue streams so the ability
 to set pricing rules, invoicing, and payment collection is critical.
 
+Full description of Supported configuration can be found here:
 
+https://access.redhat.com/articles/2798521
+
+
+But enterprises are learning that it’s important for API programs to consider more than gateways;
+analysts Kevin Matheny and Matt Braiser note in the Gartner report https://www.gartner.com/en/documents/3913711/how-to-successfully-implement-api-management[“How to Successfully Implement API
+Management,”]
+____
+“API management requires an API gateway for endpoint protection, but a gateway alone is
+insufficient. Gateways do not offer analytics, monitoring, developer support
+or governance capabilities.”
+____
 
 
 include::docs/developing-app.asciidoc[]
