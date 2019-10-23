@@ -49,6 +49,8 @@ image::./docs/images/Apicurio002.png[role=”left”]
 
 image::./docs/images/Apicurio003.png[role=”left”]
 
+Official opensource project is  https://apicurio-studio.readme.io[Apicurio Studio]  and
+it can generate https://https://quarkus.io/.io/[quarkus] framework 
 
 
 Design your API with http://spec.openapis.org/oas/v3.0.2[OpenAPI v3.0]:
