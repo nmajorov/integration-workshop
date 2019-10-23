@@ -36,13 +36,19 @@ The Benefits of an API-First Approach:
 
 ==== Design API with Apicurio
 
-Deploy  https://apicurio-studio.readme.io[Apicurio Studio]  to OpenShift.
+
+
+The officially supported is a
+ https://github.com/Apicurio/apicurito/tree/master/operator[apicurito] and it is installed with operator
+
+
 
 image::./docs/images/Apicurio001.png[role=”left”]
 
 image::./docs/images/Apicurio002.png[role=”left”]
 
 image::./docs/images/Apicurio003.png[role=”left”]
+
 
 
 Design your API with http://spec.openapis.org/oas/v3.0.2[OpenAPI v3.0]:
@@ -189,4 +195,17 @@ version: 1.0-SNAPSHOT
 package: fuse.redcloud.site
  Y: : y
 
+----
+
+
+
+
+== Fuse Console
+
+install template if it is not present:
+
+----
+oc create \
+    -n openshift \
+     -f https://raw.githubusercontent.com/jboss-fuse/application-templates/application-templates-2.1.fuse-000099-redhat-5/fis-console-namespace-template.json
 ----
