@@ -1,7 +1,15 @@
 #!/bin/sh
 
-oc project api
-WILDCARD_DOMAIN="apps-3b7a.generic.opentlc.com"
-oc new-app --file apicurio-standalone-template.yml 
+echo "use project"
+oc project
 
-#--param WILDCARD_DOMAIN=$WILDCARD_DOMAIN --param ADMIN_PASSWORD=admin
+if [ -n "${WILDCARD_DOMAIN+set}" ]; then
+  echo 'use $WILDCARD_DOMAIN  variable'
+else
+  echo "WILDCARD_DOMAIN env variable is not set"
+  exit 1
+fi
+
+sed s/example.com/$WILDCARD_DOMAIN/ apicurio-standalone-template.yml | oc new-app \
+--param GENERATED_KC_USER=admin \
+--param GENERATED_KC_PASS=admin  -f -
