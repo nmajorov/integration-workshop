@@ -3,7 +3,7 @@ Nikolaj Majorov <nmajorov@redhat.com>
 :subject: Red Hat Integration Bundle workshop
 :description: Engagement Report
 :doctype: book
-:confidentiality: Confidential
+:confidentiality: Public
 :customer:
 :listing-caption: Listing
 :toc:
@@ -19,6 +19,7 @@ ifdef::backend-pdf[]
 //:source-highlighter: pygments
 :source-highlighter: coderay
 endif::[]
+:revnumber: 1.1
 
 == History and Revisions
 
