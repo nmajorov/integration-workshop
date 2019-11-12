@@ -4,9 +4,24 @@ Nikolaj Majorov <nmajorov@redhat.com>
 :toclevels: 4
 :stylesheet: asciidoctor.css
 
-== About the Author
-I am Domain Solution Architect at http://redhat.ch[Red Hat Switzerland] +
-You can contact me  at {email} for any comments and suggestions.
+
+== History and Revisions
+
+[cols=4,cols="2,3,3,4",options=header]
+|===
+|Version
+|Date
+|Authors
+|Changes
+
+
+|1.0
+|15.09.2019
+|Nikolaj Majorov nmajorov@redhat.com
+|initial version
+
+
+|===
 
 
 
@@ -19,8 +34,6 @@ You can contact me  at {email} for any comments and suggestions.
 With software increasingly key to how users engage with businesses and how businesses innovate
 to stay competitive, the speed of application development and delivery is the new digital business
 imperative.
-
-
 
 Tech trends:
 
