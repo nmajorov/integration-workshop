@@ -1,9 +1,24 @@
-= Red Hat Integration Bundle workshop
+= {subject}
 Nikolaj Majorov <nmajorov@redhat.com>
-:toc: left
-:toclevels: 4
-:stylesheet: asciidoctor.css
-
+:subject: Red Hat Integration Bundle workshop
+:description: Engagement Report
+:doctype: book
+:confidentiality: Confidential
+:customer:
+:listing-caption: Listing
+:toc:
+:toclevels: 6
+:numbered:
+:chapter-label:
+:pdf-page-size: A4
+:pdf-style: redhat
+:pdf-stylesdir: ./template
+ifdef::backend-pdf[]
+:title-page-background-image: image:./template/EngagementJournalCoverPageLogoNew.jpg[pdfwidth=8.0in,align=center]
+:pygments-style: tango
+//:source-highlighter: pygments
+:source-highlighter: coderay
+endif::[]
 
 == History and Revisions
 
@@ -19,6 +34,11 @@ Nikolaj Majorov <nmajorov@redhat.com>
 |15.09.2019
 |Nikolaj Majorov nmajorov@redhat.com
 |initial version
+
+|1.1
+|12.11.2019
+|Nikolaj Majorov nmajorov@redhat.com
+|add fuse console
 
 
 |===
@@ -204,3 +224,5 @@ include::docs/developing-app.asciidoc[]
 
 
 include::docs/modernize-legacy.asciidoc[]
+
+include::docs/amq-app.asciidoc[]

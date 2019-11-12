@@ -50,7 +50,7 @@ image::./docs/images/Apicurio002.png[role=”left”]
 image::./docs/images/Apicurio003.png[role=”left”]
 
 Official opensource project is  https://apicurio-studio.readme.io[Apicurio Studio]  and
-it can generate https://https://quarkus.io/.io/[quarkus] framework 
+it can generate https://https://quarkus.io/.io/[quarkus] framework
 
 
 Design your API with http://spec.openapis.org/oas/v3.0.2[OpenAPI v3.0]:
@@ -105,7 +105,7 @@ fuse7-api-first/service-generated
 
 
 
-=== Build and Deploy on OpenShift
+==== Build and Deploy on OpenShift
 
 login to your OpenShift and select project:
 
@@ -138,7 +138,61 @@ See deployment in the OpenShift web-console:
 image::./docs/images/spring_app_deployed.png[Spring_deployment,640,480]
 
 
-Add api to 3scale:
+
+==== Deploy OpenAPI with 3scale toolbox
+
+Another way to enable API in 3scale is to import it with a cli tools.
+
+Use this following steps:
+
+* Install 3scale toolbox:
+
+----
+gem install 3scale_toolbox
+
+3scale --version
+----
+
+*  Import OpenAPI definition into 3scale instance:
+
+----
+#configure remote instance
+3scale remote add instance_ocp4 -k
+https://e8c7cdff72814378eb17b35a07843ad5126f7d95713767c025cc66ea20edc475@3scale-admin.apps-crc.testing
+
+#import openapi
+3scale import openapi -k \
+-d instance_ocp4 \
+--target_system_name=expences-service \
+--default-credentials-userkey=e8c7cdff72814378eb17b35a07843ad5126f7d95713767c025cc66ea20edc475 \
+http://fuse-expences-app-route-test01.apps-crc.testing/services/helloservice/swagger.json
+
+#check if service is imported well
+3scale service list instance_ocp4 -k
+
+
+#Create application plan
+3scale application-plan create instance_ocp4 expences-service nplan --default -k
+
+3scale application apply instance_ocp4 expences-app \
+--account=john --name="Expences Application" \
+--description="Created from the CLI" \
+--plan=nplan \
+--service=expences-service -k
+
+# list plan
+3scale application-plan list -k instance_ocp4 expences-service
+
+# add promote command to production
+
+----
+
+
+
+==== Test API in 3scale
+
+
+Test api in 3scale:
 
 image::./docs/images/3scale_add_api.png[3scale,640,480]
 
@@ -154,6 +208,20 @@ curl -kv "https://api-3scale-apicast-staging.apps-dc8c.generic.opentlc.com:443/s
 
 You create your first secure api !
 
+
+==== Making a service discoverable for 3scale
+
+Add view permission for 3scale account in project.
+oc adm policy add-cluster-role-to-user view system:serviceaccount:test01:default
+documentation is here:
+
+https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.4/html-single/service_discovery/index#making-service-discoverable
+
+
+TODO: add screenshot
+
+
+TODO add
 
 
 
@@ -202,12 +270,36 @@ package: fuse.redcloud.site
 
 
 
-== Fuse Console
+==== Fuse Console
+Fuse console used to enable view on all running applications in the namespace.
 
 install template if it is not present:
 
+
+[source]
 ----
 oc create \
     -n openshift \
      -f https://raw.githubusercontent.com/jboss-fuse/application-templates/application-templates-2.1.fuse-000099-redhat-5/fis-console-namespace-template.json
 ----
+
+login to fuse console with OpenShift credentials first, then select running fuse pod:
+
+image::./docs/images/fuse_console001.jpeg[]
+
+by clicking connect button you can connect and see the route of specific pod:
+
+image::./docs/images/fuse_console002.jpeg[]
+
+In the fuse console you can evaluate statistic of camel route and exam the
+jndi tree of the application.
+
+
+==== CodeReady Studio
+
+Red Hat recommend  https://www.redhat.com/de/technologies/jboss-middleware/developer-studio[CoderReady studio]
+and https://openshift.io[CodeReady Toolchain] for local development on laptops.
+
+View on Camel route opened in CodeReady studio:
+
+image::./docs/images/CodeReadyStudio.jpeg[CodeReadyStudio]

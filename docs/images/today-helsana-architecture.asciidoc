@@ -1,0 +1,64 @@
+
+==  Today architecture
+
+Integration solution today at customer represent monolithic
+architecture with a high cost for maintenance and development.
+Current ESB is not designed for a cloud and not deliver agility
+and innovation.
+
+image::./images/today_architecture.png[Helsana's today architecture]
+
+To bring efficiency in business from year 2000 companies
+uses SOA (service-oriented architecture) to allow reuse better business functionality into
+the organization and to enable the organization and the business
+to better communicate and collaborate with each other.
+For most of contract between services the **SOAP (Simple Object Access Protocol)**  is used.
+SOAP is a primary service remote-access protocol due to the fact that Microsoft
+originally developed it to replace DOCOM and CORBA protocol.
+
+Main points in SOAP based messaging exchange:
+
+* Contact between services are defined with https://www.w3.org/TR/wsdl20/[** WSDL (Web Services Description Language Version)**] standard.
+the WSDL define a mapping in following XML elements for service:
+
+  ** Description
+  ** Element declaration
+  ** Type definition
+  ** Interface component
+  ** Interface Fault component +
+     interesting here that the error handling is integrated as a part of protocol.
+  ** Interface operational component
+  ** The interface Message reference
+  ** The binding component
+  ** The Service component
+  ** The Endpoint component
+
+
+* SOAP service consumer has to generate a stub for each service.
+SOAP web-services are really complex to model by using  **model-first-approach**
+and with RedHat experience we see that customers are mostly use **code-first approach** for development.
+Direct XML payload processing is in most cases is not possible, that is why developers are
+relying to WSDL generators framework. The example of  popular one is  https://cxf.apache.org/docs/wsdl-to-java.html[Apace CXF WSDL to JAVA]
+
+Specification for https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wss[Web Services Security (WSS)] for SOAP web-services
+is more then 70 pages. Which make any implementation difficult and hard to maintain.
+Last changes to SOAP Specification where done in 2006 and not anymore updated since then.
+
+
+In the current SOA based architecture the there is a very distinct and formal
+service taxonomy in terms of the type of service and the role of that
+service in the overall architecture. While there can be any number of
+service types within SOA,  there are several at Helsana:
+
+* API Services
+
+* Business services
+
+* Business services
+
+* BPM Layer
+
+* Messaging layer
+
+there are different teams are owner of each service the coordination between team
+are difficult if one business requirement are needed to be change.

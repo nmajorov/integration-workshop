@@ -23,7 +23,7 @@ lets see how we can address this with  Microservice Architecture and Red Hat Int
 
 Legasy application are using a WSDL (Web Services Description Language ) to describe Web services based on an abstract model of what the service offers.
 
-
+TODO: ... add modern way...
 
 
 === Routing
@@ -37,9 +37,16 @@ Useful links:
 https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.6/html/administering_the_api_gateway/operating-apicast
 
 
+TODO: add example
+
 
 === Protocol transformation
 
 Example of SOAP protocol transformation
 
 https://github.com/nmajorov/fuse_eap_keycloak
+
+**WSDL to Rest Migration Tool** helped to migrate from legacy service definitions.
+
+More infos can be found here:
+https://github.com/jboss-fuse/wsdl2rest
