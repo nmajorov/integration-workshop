@@ -1,6 +1,6 @@
 = {subject}
 Nikolaj Majorov <nmajorov@redhat.com>
-:subject: Red Hat Integration Bundle workshop
+:subject: Red Hat Integration  workshop
 :description: Engagement Report
 :doctype: book
 :confidentiality: Public
@@ -40,6 +40,12 @@ endif::[]
 |12.11.2019
 |Nikolaj Majorov nmajorov@redhat.com
 |add fuse console
+
+|1.2
+|05.03.2022
+|Nikolaj Majorov nmajorov@redhat.com
+|update workshop to latest Integration
+
 
 
 |===
