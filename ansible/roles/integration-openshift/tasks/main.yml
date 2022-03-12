@@ -16,3 +16,8 @@
 
 - import_tasks: auth.yaml
   tags: auth,htpasswd
+
+- import_tasks: integration-operator.yaml
+  tags:
+    - operator
+    - integration
