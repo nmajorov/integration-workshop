@@ -1,0 +1,18 @@
+---
+# initial tasks for openshift4
+# ------------------------------------------------------------------------------
+# Configure authentication
+# ------------------------------------------------------------------------------
+
+
+
+- debug:
+    msg: " Kube config path: {{ kubeconfig }}"
+
+
+- fail: msg="The variable 'kubeconfig' is not defined"
+  when: kubeconfig is undefined
+
+
+- import_tasks: auth.yaml
+  tags: auth,htpasswd

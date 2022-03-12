@@ -1,0 +1,44 @@
+# install and configure ibm-block-csi operator
+---
+- name: Create Namespace
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    definition:
+      kind: Namespace
+      apiVersion: v1
+      metadata:
+        name: "{{ integration_namespace }}"
+  tags:
+    - operator
+    - integration
+
+- name: "install operator"
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    namespace: "{{ integration_namespace }}"
+    template:
+      crds/integration_operator_subscription.j2
+  register: operators
+  tags:
+    - operator
+    - integration
+
+
+
+- name: Wait for operator pods to start
+  shell: oc get pod -l app.kubernetes.io/name=ibm-block-csi-operator  -n "{{ integration_namespace }}" | grep -E "(1/1|2/2).*Running" | wc -l
+  register: podsrunning
+  until: " '1' in podsrunning.stdout"
+  retries: 120
+  delay: 2
+  changed_when: false
+  tags:
+    - operator
+    - integration
+
+
+- name: Print operator pod status
+  ansible.builtin.debug:
+    msg: "pods running: {{podsrunning}}"

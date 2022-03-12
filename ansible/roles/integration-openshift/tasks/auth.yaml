@@ -1,0 +1,102 @@
+# - name: get existing indentity providers
+#   command: "oc get oauths.config.openshift.io cluster   -o=jsonpath='{.spec.identityProviders}'"
+#   register: existing_identity_providers
+#
+# - debug:
+#     msg: "existing_identity_providers: {{existing_identity_providers.stdout_lines}}"
+#
+# - set_fact:
+#     identity_roviders: "{{existing_identity_providers.stdout_lines}}"
+#   tags: auth
+#
+
+- set_fact:
+   identity_roviders: []
+  tags: auth
+
+- name: "test loop"
+  debug:
+     msg: "{{item.key}}"
+  loop: "{{ lookup('dict', htpasswd) }}"
+
+
+
+- name: Create htpasswd secret
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      apiVersion: v1
+      data:
+        htpasswd: "{{ item.value | b64encode }}"
+      kind: Secret
+      metadata:
+        name: "httpasswd-{{ item.key }}"
+        namespace: openshift-config
+      type: Opaque
+  loop: "{{ lookup('dict', htpasswd) }}"
+  tags: auth,htpasswd
+
+- name: Create htpasswd identity provider template
+  tags: auth,htpasswd
+  set_fact:
+    htpasswd_idp:
+      htpasswd:
+        fileData:
+          name: "httpasswd-{{ item.key }}"
+      mappingMethod: claim
+      name: "HtPasswd-{{ item.key }}"
+      type: HTPasswd
+  loop: "{{ lookup('dict', htpasswd) }}"
+  register:  idps
+
+# what was registered in a previous loop ?
+- name: debug idps result
+  debug:
+     msg: "IDP: {{ item['ansible_facts'] }}"
+  loop: "{{ idps.results }}"
+
+# smash all providers together
+- name: Push htpasswd_idp to identity_providers
+  tags: auth,htpasswd
+  set_fact:
+    identity_roviders: "{{ identity_roviders }} + [ {{ item['ansible_facts']['htpasswd_idp'] }} ]"
+  loop: "{{ idps.results }}"
+
+-  debug:
+     msg: "identity_roviders: {{ identity_roviders  }}"
+
+- name: Configure identity providers
+  tags: auth
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      apiVersion: config.openshift.io/v1
+      kind: OAuth
+      metadata:
+        name: cluster
+      spec:
+        identityProviders: "{{ identity_roviders }}"
+
+- name: Add cluster-admin role to admins
+  tags: auth
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      kind: ClusterRoleBinding
+      apiVersion: rbac.authorization.k8s.io/v1
+      metadata:
+        name: "{{ item }}-cluster-admin"
+      subjects:
+      - apiGroup: rbac.authorization.k8s.io
+        kind: User
+        name: "{{ item }}"
+      roleRef:
+        kind: ClusterRole
+        name: "cluster-admin"
+  with_items: "{{ocpadminusers}}"

@@ -1,0 +1,175 @@
+# ------------------------------------------------------------------------------
+# Create DYNAMIC NFS nfs-client-provisioner until OCS is availabl
+# Stolen from:
+# https://github.com/RedHat-EMEA-SSA-Team/hetzner-ocp4/blob/master/ansible/roles/openshift-4-cluster/tasks/post-install-storage-nfs.yml
+# ------------------------------------------------------------------------------
+- name: Create Namespace
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      kind: Namespace
+      apiVersion: v1
+      metadata:
+        name: "{{ storage_nfs_target_namespace }}"
+
+- name: Create ServiceAccount
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      kind: ServiceAccount
+      apiVersion: v1
+      metadata:
+        name: nfs-client-provisioner
+        namespace: "{{ storage_nfs_target_namespace }}"
+
+- name: Create ClusteRole nfs-client-provisioner-runner
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      kind: ClusterRole
+      apiVersion: rbac.authorization.k8s.io/v1
+      metadata:
+        name: nfs-client-provisioner-runner
+      rules:
+        - apiGroups: [""]
+          resources: ["persistentvolumes"]
+          verbs: ["get", "list", "watch", "create", "delete"]
+        - apiGroups: [""]
+          resources: ["persistentvolumeclaims"]
+          verbs: ["get", "list", "watch", "update"]
+        - apiGroups: ["storage.k8s.io"]
+          resources: ["storageclasses"]
+          verbs: ["get", "list", "watch"]
+        - apiGroups: [""]
+          resources: ["events"]
+          verbs: ["create", "update", "patch"]
+
+- name: Create ClusteRoleBinding nfs-client-provisioner-runner <-> nfs-client-provisioner
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    definition:
+      kind: ClusterRoleBinding
+      apiVersion: rbac.authorization.k8s.io/v1
+      metadata:
+        name: run-nfs-client-provisioner
+      subjects:
+        - kind: ServiceAccount
+          name: nfs-client-provisioner
+          namespace: "{{ storage_nfs_target_namespace }}"
+      roleRef:
+        kind: ClusterRole
+        name: nfs-client-provisioner-runner
+        apiGroup: rbac.authorization.k8s.io
+
+- name: Create Role leader-locking-nfs-client-provisioner
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      kind: Role
+      apiVersion: rbac.authorization.k8s.io/v1
+      metadata:
+        name: leader-locking-nfs-client-provisioner
+        namespace: "{{ storage_nfs_target_namespace }}"
+      rules:
+        - apiGroups: [""]
+          resources: ["endpoints"]
+          verbs: ["get", "list", "watch", "create", "update", "patch"]
+
+- name: Create RoleBinding leader-locking-nfs-client-provisioner <-> nfs-client-provisioner
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      kind: RoleBinding
+      apiVersion: rbac.authorization.k8s.io/v1
+      metadata:
+        name: leader-locking-nfs-client-provisioner
+        namespace: "{{ storage_nfs_target_namespace }}"
+      subjects:
+        - kind: ServiceAccount
+          name: nfs-client-provisioner
+      roleRef:
+        kind: Role
+        name: leader-locking-nfs-client-provisioner
+        apiGroup: rbac.authorization.k8s.io
+
+- name: Add SCC hostmount-anyuid to nfs-client-provisioner
+  tags: nfsprov, storage
+  command: "oc adm policy add-scc-to-user hostmount-anyuid -n {{ storage_nfs_target_namespace }} -z nfs-client-provisioner"
+
+- name: Deploy nfs-provisioner
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      kind: Deployment
+      apiVersion: apps/v1
+      metadata:
+        name: nfs-client-provisioner
+        namespace: "{{ storage_nfs_target_namespace }}"
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: nfs-client-provisioner
+        strategy:
+          type: Recreate
+        template:
+          metadata:
+            labels:
+              app: nfs-client-provisioner
+          spec:
+            serviceAccountName: nfs-client-provisioner
+            containers:
+              - name: nfs-client-provisioner
+                image: docker.io/rkevin/nfs-subdir-external-provisioner:fix-k8s-1.20
+                volumeMounts:
+                  - name: nfs-client-root
+                    mountPath: /persistentvolumes
+                env:
+                  - name: PROVISIONER_NAME
+                    value: redhat-emea-ssa-team/nfs-client-provisioner
+                  - name: NFS_SERVER
+                    value: "{{nfs_server}}"
+                  - name: NFS_PATH
+                    value: "{{nfs_path}}"
+            volumes:
+              - name: nfs-client-root
+                nfs:
+                  server: "{{nfs_server}}"
+                  path: "{{ nfs_path }}"
+
+- name: Storage Class
+  tags: nfsprov, storage
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: no
+    definition:
+      apiVersion: storage.k8s.io/v1
+      kind: StorageClass
+      metadata:
+        name: managed-nfs-storage
+        annotations:
+          storageclass.kubernetes.io/is-default-class: "true"
+      provisioner: redhat-emea-ssa-team/nfs-client-provisioner
+      parameters:
+        archiveOnDelete: "false"
