@@ -6,7 +6,9 @@ ocp_admin_users:
   - niko
 
 # namespace there to install operators
-integration_namespace: "integration"
+integration_namespace: "rh-int"
+fuse_online_namespace: "syndesis"
+
 
 htpasswd:
   local: |

@@ -1,0 +1,9 @@
+apiVersion: integration.redhat.com/v1
+kind: Installation
+metadata:
+  name: fuse-installation
+spec:
+  fuse-online-installation:
+    enabled: true
+    mode: namespace
+    namespace:  {{ fuse_online_namespace }}

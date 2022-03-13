@@ -21,3 +21,8 @@
   tags:
     - operator
     - integration
+
+- import_tasks: fuse-online.yaml
+  tags:
+    - operator
+    - fuse-online

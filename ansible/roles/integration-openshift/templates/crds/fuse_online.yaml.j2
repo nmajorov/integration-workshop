@@ -1,0 +1,16 @@
+apiVersion: syndesis.io/v1beta3
+kind: Syndesis
+metadata:
+  name: app
+  namespace: {{ fuse_online_namespace }}
+spec:
+  addons:
+    jaeger:
+      enabled: false
+    ops:
+      enabled: false
+    publicApi:
+      enabled: false
+    todo:
+      enabled: false
+status: {}

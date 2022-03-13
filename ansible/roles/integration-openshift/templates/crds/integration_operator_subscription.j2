@@ -1,4 +1,17 @@
 ---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: Installation.v1.integration.redhat.com
+  name: integration-64zhwx
+  namespace: {{ integration_namespace }}
+spec:
+  targetNamespaces:
+  - {{ integration_namespace }}
+
+
+---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
