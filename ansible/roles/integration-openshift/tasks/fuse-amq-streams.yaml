@@ -1,0 +1,65 @@
+# install and configure integration operator
+---
+- name: Create  amq streams namespace
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    definition:
+      kind: Namespace
+      apiVersion: v1
+      metadata:
+        name: "{{ fuse_amqstreams_namespace }}"
+  tags:
+    - operator
+    - amq-streams
+
+- name: "install amq-streams operators"
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    namespace: "{{ fuse_amqstreams_namespace }}"
+    template:
+      crds/integration_v1_amq_streams_operator.j2
+  register: operators
+  tags:
+    - operator
+    - amq-streams
+
+
+
+- name: Wait for operator pods to start
+  shell: |
+    oc get pod -l com.company=Red_Hat,name=amq-streams-cluster-operator  \
+    -n "{{ fuse_amqstreams_namespace }}" | grep -E "(1/1|2/2).*Running" | wc -l
+  register: podsrunning
+  until: " '1' in podsrunning.stdout"
+  retries: 120
+  delay: 2
+  changed_when: false
+  tags:
+    - operator
+    - amq-streams
+
+
+- name: Print operator camlk operator pod status
+  ansible.builtin.debug:
+    msg: "pods running: {{podsrunning}}"
+  tags:
+    - operator
+    - amq-streams
+
+# see nice customisation
+#https://strimzi.io/blog/2019/04/30/accessing-kafka-part-3/
+
+- name: install kafka single persistent
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    namespace: "{{ fuse_amqstreams_namespace }}"
+    template:
+      crds/kafka-single-persistence.yaml
+  register: operators
+  tags:
+    - operator
+    - amq-streams
+    - kafka-single-persistent

@@ -32,5 +32,7 @@
     - operator
     - fuse-camelk
 
-#rht.subcomp=camel-k-operator
-# com.company=Red_Hat,name=camel-k-operator
+- import_tasks: fuse-amq-streams.yaml
+  tags:
+    - operator
+    - amq-streams
