@@ -8,7 +8,7 @@ ocp_admin_users:
 # namespace there to install operators
 integration_namespace: "rh-int"
 fuse_online_namespace: "syndesis"
-
+fuse_camelk_namespace: "rh-camelk"
 
 htpasswd:
   local: |

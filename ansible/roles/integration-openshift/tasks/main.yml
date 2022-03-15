@@ -26,3 +26,11 @@
   tags:
     - operator
     - fuse-online
+
+- import_tasks: fuse-camelk.yaml
+  tags:
+    - operator
+    - fuse-camelk
+
+#rht.subcomp=camel-k-operator
+# com.company=Red_Hat,name=camel-k-operator
