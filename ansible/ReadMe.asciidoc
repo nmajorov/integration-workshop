@@ -1,0 +1,34 @@
+# Ansible OpenShift deployment
+
+Ansible playbook for openshift deployment.
+
+## Preparation
+
+1. Install dependencies:
+
+----
+pip install openshift
+
+ansible-galaxy collection install kubernetes.core 
+
+----
+
+2. Login to openshift using oc cli or kubectl
+
+
+## Deploy on openshift
+
+Deploy operators with command:
+
+[source, bash]
+----
+ ansible-playbook integration-install.yaml --tags operator
+----
+
+to install fuse-online use:
+
+
+[source, bash]
+----
+ansible-playbook integration-install.yaml --tags fuse-online 
+----

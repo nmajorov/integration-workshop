@@ -1,0 +1,49 @@
+# install and configure integration operator
+---
+- name: Create  fuse camelk Namespace
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    definition:
+      kind: Namespace
+      apiVersion: v1
+      metadata:
+        name: "{{ fuse_camelk_namespace }}"
+  tags:
+    - operator
+    - fuse-camelk
+
+- name: "install fuse camelk operators"
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    namespace: "{{ fuse_camelk_namespace }}"
+    template:
+      crds/integration_v1_fuse_camelk_operator.j2
+  register: operators
+  tags:
+    - operator
+    - fuse-camelk
+
+
+
+- name: Wait for operator pods to start
+  shell: |
+    oc get pod -l com.company=Red_Hat,name=camel-k-operator  \
+    -n "{{ fuse_camelk_namespace }}" | grep -E "(1/1|2/2).*Running" | wc -l
+  register: podsrunning
+  until: " '1' in podsrunning.stdout"
+  retries: 120
+  delay: 2
+  changed_when: false
+  tags:
+    - operator
+    - fuse-camelk
+
+
+- name: Print operator camlk operator pod status
+  ansible.builtin.debug:
+    msg: "pods running: {{podsrunning}}"
+  tags:
+    - operator
+    - fuse-camelk

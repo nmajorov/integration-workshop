@@ -1,0 +1,56 @@
+# install and configure integration operator
+---
+- name: Create Namespace
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    definition:
+      kind: Namespace
+      apiVersion: v1
+      metadata:
+        name: "{{ fuse_online_namespace }}"
+  tags:
+    - operator
+    - fuse-online
+
+- name: "install fuse online operators"
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    namespace: "{{ fuse_online_namespace }}"
+    template:
+      crds/integration_v1_fuse_online_installation.j2
+  register: operators
+  tags:
+    - operator
+    - fuse-online
+
+
+- name: Wait for operator pods to start
+  shell: oc get pod -l com.company=Red_Hat,name=syndesis-operator  -n "{{ fuse_online_namespace }}" | grep -E "(1/1|2/2).*Running" | wc -l
+  register: podsrunning
+  until: " '1' in podsrunning.stdout"
+  retries: 120
+  delay: 2
+  changed_when: false
+  tags:
+    - operator
+    - fuse-online
+
+
+- name: Print operator pod status
+  ansible.builtin.debug:
+    msg: "pods running: {{podsrunning}}"
+
+
+
+- name: "install fuse online instance"
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    namespace: "{{ fuse_online_namespace }}"
+    template:
+      crds/fuse_online.yaml.j2
+  tags:
+    - operator
+    - fuse-online

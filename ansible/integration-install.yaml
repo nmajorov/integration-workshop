@@ -1,0 +1,12 @@
+---
+- name: "integration bunle install for openshift 4.x"
+  hosts: "localhost"
+  gather_facts: false
+  connection: local
+  become: false
+  vars:
+      kubeconfig: "{{ lookup('env','HOME') }}/.kube/config"
+
+
+  roles:
+      - {role: integration-openshift}

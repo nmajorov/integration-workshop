@@ -1,0 +1,38 @@
+---
+# initial tasks for openshift4
+# ------------------------------------------------------------------------------
+# Configure authentication
+# ------------------------------------------------------------------------------
+
+
+
+- debug:
+    msg: " Kube config path: {{ kubeconfig }}"
+
+
+- fail: msg="The variable 'kubeconfig' is not defined"
+  when: kubeconfig is undefined
+
+
+- import_tasks: auth.yaml
+  tags: auth,htpasswd
+
+- import_tasks: integration-operator.yaml
+  tags:
+    - operator
+    - integration
+
+- import_tasks: fuse-online.yaml
+  tags:
+    - operator
+    - fuse-online
+
+- import_tasks: fuse-camelk.yaml
+  tags:
+    - operator
+    - fuse-camelk
+
+- import_tasks: fuse-amq-streams.yaml
+  tags:
+    - operator
+    - amq-streams
