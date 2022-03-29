@@ -1,5 +1,15 @@
 # install and configure ibm-block-csi operator
 ---
+
+
+- name: print namespace
+  ansible.builtin.debug:
+    msg: "create namespace for integration : {{integration_namespace}}"
+  tags:
+    - operator
+    - integration
+
+
 - name: Create Namespace
   kubernetes.core.k8s:
     state: present

@@ -1,0 +1,5 @@
+#ocp5 stormshift vars
+integration_namespace: "nmajorov-int-demo"
+fuse_online_namespace: "nmajorov-int-demo"
+fuse_camelk_namespace: "nmajorov-int-demo"
+fuse_amqstreams_namespace: "nmajorov-int-demo"
