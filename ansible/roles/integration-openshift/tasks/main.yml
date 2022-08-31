@@ -32,7 +32,7 @@
     - operator
     - fuse-camelk
 
-- import_tasks: fuse-amq-streams.yaml
+- import_tasks: amq-streams.yaml
   tags:
     - operator
     - amq-streams

@@ -63,3 +63,15 @@
     - operator
     - amq-streams
     - kafka-single-persistent
+
+
+- name: install kafka topic
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig }}"
+    namespace: "{{ fuse_amqstreams_namespace }}"
+    template: topics/eda-events-topic.yml
+  tags:
+    - amq-streams
+    - kafka-single-persistent
+    - kafka-topic

@@ -11,6 +11,8 @@ fuse_online_namespace: "rh-int-syndesis"
 fuse_camelk_namespace: "rh-int-camelk"
 fuse_amqstreams_namespace: "rh-int-kafka"
 
+kafka_cluster_name: "nm-cluster"
+
 htpasswd:
   local: |
     niko:$apr1$64z.beEg$qa6ua5luYoNMiY0iGR/Rq0
